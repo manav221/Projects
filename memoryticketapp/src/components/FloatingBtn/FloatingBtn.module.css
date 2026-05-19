@@ -1,0 +1,42 @@
+@import url(../theme.css);
+
+.create-stub-btn {
+    width: 100%;
+    background-color: var(--surface);
+    padding: var(--space-sm);
+    padding-bottom: var(--space-md);
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    bottom: 0%;
+    left: 50%;
+
+}
+
+.create-stub-btn .cta-btn {
+    padding: var(--space-h) var(--space-md);
+    outline: none;
+    border: none;
+    border-radius: var(--radius-pill);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: var(--transition-fst);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.cta-btn span {
+    position: relative;
+    top: 1px;
+    font-weight: 600;
+    font-size: var(--font-md);
+}
+
+.cta-btn:hover {
+    box-shadow: var(--shadow);
+}
+
+.cta-btn:active {
+    transform: scale(0.95);
+}
