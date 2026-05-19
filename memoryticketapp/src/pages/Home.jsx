@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar/Navbar.jsx'
 import Gallery from '../components/Gallery/Gallery.jsx'
-import FloatingBtn from '../components/FloatingBtn/FloatingBtn.jsx'
+import FloatingBtn from '../components/FloatingMenu/FloatingBtn.jsx'
 
 const Home = () => {
     return (
