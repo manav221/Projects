@@ -1,0 +1,50 @@
+@import url(../theme.css);
+
+.top-bar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar .top-bar-right{
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.top-bar-right .more-options{
+    padding: var(--space-xs);
+    background-color: #F0F0F0;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fst);
+    position: relative;
+}
+
+.more-icon{
+    position: relative;
+    top: 2px;
+}
+
+.more-options:hover{
+    background-color: var(--secondary);
+    box-shadow: var(--shadow);
+}
+
+.all-options{
+    padding-block: var(--space-sm);
+    padding-inline: var(--space-lg);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #F0F0F0;
+    box-shadow: var(--shadow);
+}
+
+.hidden{
+    display: none;
+}

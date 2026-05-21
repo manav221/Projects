@@ -1,0 +1,10 @@
+.crop-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+canvas {
+    width: 800px;
+    height: 600px;
+    /* flex-grow: 1; */
+}

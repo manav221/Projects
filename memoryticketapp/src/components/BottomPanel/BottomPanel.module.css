@@ -1,0 +1,32 @@
+.bottom-panel{
+    width: 100%;
+    padding: var(--space-md);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: var(--surface);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    justify-self: end;
+}
+
+.bottom-panel .panel-option{
+    height: 2rem;
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-option>svg{
+    padding-inline: var(--space-md);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fst);
+}
+
+.panel-option>svg:active{
+    background-color: var(--primary);
+}

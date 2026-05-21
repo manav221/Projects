@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './Gallery.module.css'
-import Stub from '../Stub/Stub.jsx'
+import TicketStub from '../TicketStub/TicketStub.jsx'
 
 const Gallery = () => {
     return (
         <div className={styles['all-stubs']}>
-            <Stub />
+            <TicketStub />
         </div>
     )
 }

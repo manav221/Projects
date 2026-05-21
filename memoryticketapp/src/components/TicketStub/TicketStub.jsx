@@ -1,16 +1,16 @@
 import React from 'react'
-import styles from './Stub.module.css'
+import styles from './TicketStub.module.css'
 import quotes from '../../assets/quotes.svg'
 import { MapPin, Calendar } from 'lucide-react';
 import stub from '../../assets/image\ 1.svg'
 
-const Stub = () => {
+const TicketStub = () => {
     return (
         <div className={styles['stub']}>
             <img className={styles['stub-mockup']} src={stub} alt="" />
             <div className={styles['stub-details']}>
                 <div className={styles['stub-top-data']}>
-                    <div className={styles['img']}></div>
+                    <img className={styles['img']} />
                     <div className={styles['stub-name']}>Ghibli Park</div>
                     <div className={styles['stub-date-time']}>
                         <span className={styles['stub-location']}>
@@ -34,4 +34,4 @@ const Stub = () => {
     )
 }
 
-export default Stub
+export default TicketStub
