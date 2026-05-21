@@ -11,7 +11,6 @@ const CropImg = ({ recieveData }) => {
     const drawHeight = img.height * scale;
     const x = (canvasElement.width - drawWidth) / 2;
     const y = (canvasElement.height - drawHeight) / 2;
-    console.log({ x, y, drawWidth, drawHeight })
     return { x, y, drawWidth, drawHeight };
   }
   useEffect(() => {
@@ -19,21 +18,22 @@ const CropImg = ({ recieveData }) => {
     const newImg = new Image();
     const url = URL.createObjectURL(recieveData[0]);
     newImg.src = url;
+
     newImg.onload = () => {
-      const { x, y, drawWidth, drawHeight } = contain(canvas, newImg);
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
+      const { x, y, drawWidth, drawHeight } = contain(canvas, newImg);
       const ctx = canvas.getContext("2d");
       ctx.drawImage(newImg, x, y, drawWidth, drawHeight);
-
-      return () => {
-        URL.revokeObjectURL(url);
-      }
+    }
+    return () => {
+      URL.revokeObjectURL(url);
     }
   }, [])
   return (
     <div className={styles['crop-area']}>
-      <canvas ref={canvasRef}></canvas>
+      <canvas ref={canvasRef}>
+      </canvas>
     </div>
   )
 }
