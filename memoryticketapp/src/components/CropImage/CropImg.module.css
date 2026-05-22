@@ -1,19 +1,29 @@
 .crop-area {
+    flex-grow: 1;
     overflow: hidden;
-    /* position: relative; */
+    position: relative;
 }
 
 canvas {
-    width: 800px;
-    height: 600px;
-    /* margin-inline: auto; */
-    /* flex-grow: 1; */
+    max-width: 800px;
+    max-height: 600px;
+    position: relative;
 }
 
-.select-area {
-    height: 100%;
-    width: 100%;
-    border: 1px solid rgb(255, 255, 255);
+.cropper {
+    width: 5rem;
+    height: 5rem;
+    background-color: #2424242a;
+    border: 1px solid rgba(24, 24, 24, 0.718);
     position: absolute;
+    top: 0;
+    left: 0;
     z-index: 2;
+}
+
+.cropper .handle{
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    position: absolute;
 }
