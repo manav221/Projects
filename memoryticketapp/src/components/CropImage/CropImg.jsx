@@ -1,58 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from './CropImg.module.css'
-const CropImg = ({ recieveData }) => {
+import useImageCrop from '../../hooks/useImageCrop'
+import { allHandles, getCropImage } from '../../utils/cropUtils'
+import BackBtn from '../Buttons/BackBtn'
+const CropImg = ({ recieveData, setStatus, sendCropImageData, setCurrentStep }) => {
   const canvasRef = useRef(null);
-  const [cropRect, setCropRect] = useState({ x: 0, y: 0, height: 100, width: 100 });
-  const [activeHandle, setActiveHandle] = useState({
-    handle: null,
-    startWidth: null,
-    startHeight: null,
-    startX: null,
-    startY: null,
-  })
-  const cropRectRef = useRef(cropRect);
-  const activeHandleRef = useRef(activeHandle);
-
-  cropRectRef.current = cropRect;
-  activeHandleRef.current = activeHandle;
-
-  const allHandlesRef = useRef([
-    {
-      handleName: "br",
-      style: { right: 0, bottom: 0, transform: "translate(50%,50%)" },
-    }
-  ])
-
-  const handleMouseDown = ({ handleName, offsetx, offsety, dets }) => {
-    setActiveHandle(
-      {
-        handle: handleName,
-        startX: dets.clientX - offsetx,
-        startY: dets.clientY - offsety,
-        startWidth: cropRect.width,
-        startHeight: cropRect.height
-      }
-    );
-  }
-  const handleMouseMove = (dets, offsetx, offsety) => {
-    let deltaX = (dets.clientX - offsetx) - activeHandleRef.current.startX;
-    let deltaY = (dets.clientY - offsety) - activeHandleRef.current.startY;
-    setCropRect(prev => ({
-      ...prev,
-      width: activeHandleRef.current.startWidth + deltaX,
-      height: activeHandleRef.current.startHeight + deltaY
-    }))
-  }
+  const overlayCanvasRef = useRef(null);
+  const { cropRect, handleMouseDown, handleMouseDownCropper } = useImageCrop();
 
   useEffect(() => {
-    const canvas = canvasRef.current;
     const newImg = new Image();
-    const url = URL.createObjectURL(recieveData[0]);
+    const canvas = canvasRef.current;
+    const overlayCanvas = overlayCanvasRef.current
+    const url = URL.createObjectURL(recieveData);
     newImg.src = url;
 
     newImg.onload = () => {
       canvas.width = newImg.width;
       canvas.height = newImg.height;
+      requestAnimationFrame(() => {
+        const rect = canvas.getBoundingClientRect();
+        overlayCanvas.width = rect.width;
+        overlayCanvas.height = rect.height;
+      })
       const ctx = canvas.getContext("2d");
       ctx.drawImage(newImg, 0, 0);
     }
@@ -62,51 +32,47 @@ const CropImg = ({ recieveData }) => {
   }, []);
 
   useEffect(() => {
-    if (!activeHandle.handle) return;
-    let rect = canvasRef.current.getBoundingClientRect();
-    const onMove = (dets) => {
-      handleMouseMove(dets, rect.left, rect.top)
-    }
-    const onUp = () => {
-      setActiveHandle(prev => ({ ...prev, handle: null }))
-    }
+    const overlayCanvas = overlayCanvasRef.current;
+    const ctx = overlayCanvas.getContext("2d");
 
-    window.addEventListener("mousemove", onMove)
-    window.addEventListener("mouseup", onUp)
-
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-    }
-  }, [activeHandle.handle])
-
+    ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height)
+    ctx.fillStyle = "rgba(0, 0, 0, 0.41)"
+    ctx.fillRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+    ctx.clearRect(cropRect.cropRectX, cropRect.cropRectY, cropRect.width, cropRect.height);
+  }, [cropRect]);
 
   return (
-    <div className={styles['crop-area']}>
-      <canvas ref={canvasRef}>
-      </canvas>
-      <div className={styles["cropper"]}
-        style={{ width: `${cropRect.width}px`, height: `${cropRect.height}px` }}>
-
-        {allHandlesRef.current.map((handle) => {
-          return (
-            <div
-              key={handle.handleName}
-              className={`${styles['handle']}`}
-              style={handle.style}
-              onMouseDown={(dets) => {
-                let rect = canvasRef.current.getBoundingClientRect();
-                let details = {
-                  handleName: handle.handleName,
-                  offsetx: rect.left,
-                  offsety: rect.top,
-                  dets: dets
-                }
-                handleMouseDown(details);
-              }}
-            ></div>
-          )
-        })}
+    <div className={styles['select']}>
+      <div className={styles['crop-area']}>
+        <canvas className={styles["overlay-canvas"]} ref={overlayCanvasRef}>
+        </canvas>
+        <canvas className={styles["img-canvas"]} ref={canvasRef}>
+        </canvas>
+        <div className={styles["cropper"]} onMouseDown={(dets) => { handleMouseDownCropper(dets, canvasRef) }}
+          style={{
+            width: `${cropRect.width}px`, height: `${cropRect.height}px`, userSelect: "none",
+            left: `${cropRect.cropRectX}px`, top: `${cropRect.cropRectY}px`
+          }}>
+          {allHandles.map((handle) => {
+            return (
+              <div
+                key={handle.handle}
+                className={`${styles['handle']}`}
+                style={handle.style}
+                onMouseDown={(dets) => {
+                  handleMouseDown(dets, handle.handle, canvasRef)
+                }}
+              ></div>
+            )
+          })}
+        </div>
+      </div >
+      <div className={styles["bottom-actions"]}>
+        <BackBtn name={"Continue"} customStyle={{width:"100%",padding:"var(--space-md)"}} onClick={() => {
+          sendCropImageData(getCropImage(cropRect, canvasRef));
+          setStatus(prev => ({ ...prev, select: true }))
+          setCurrentStep(3)
+        }} />
       </div>
     </div>
   )

@@ -1,32 +1,28 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './Topbar.module.css';
-import SaveBtn from '../Buttons/SaveBtn';
-import ExportBtn from '../Buttons/ExportBtn';
-import ShareBtn from '../Buttons/ShareBtn';
 import BackBtn from '../Buttons/BackBtn';
-import { Ellipsis } from 'lucide-react';
 
-const Topbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const openOptions = () => {
-        isOpen ? setIsOpen(false) : setIsOpen(true);
-    }
+const Topbar = ({ allStepStatus }) => {
+    const allSteps = [
+        { stepName: "upload", },
+        { stepName: "select", },
+        { stepName: "details", },
+        { stepName: "preview", },
+    ];
     return (
-        <div className={styles['top-bar']}>
-            <div className={styles["top-bar-left"]}>
-                <BackBtn />
+        <div className={styles["topbar"]}>
+            <div className={styles['top-bar-top']}>
+                <h2>Create Stub</h2>
             </div>
-
-            <div className={styles["top-bar-right"]}>
-                <SaveBtn />
-                <div onClick={openOptions} className={styles['more-options']}>
-                    <Ellipsis className={styles['more-icon']} size={20} />
-
-                    <div className={`${styles['all-options']} ${styles[!isOpen?"hidden":""]}`}>
-                        <ExportBtn />
-                        <ShareBtn />
-                    </div>
-                </div>
+            <div className={styles["progress-bar"]}>
+                {allSteps.map((step) => {
+                    return (
+                        <div key={step.stepName}>
+                            <div className={`${styles['bar']} ${styles[allStepStatus[step.stepName] ? "completed" : "remaining"]}`}></div>
+                            <span>{step.stepName}</span>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )

@@ -2,31 +2,37 @@ import React, { useState } from 'react'
 import { Upload, UtilityPole } from 'lucide-react';
 import styles from './UploadImg.module.css'
 import CropImg from '../CropImage/CropImg';
-const UploadImg = (props) => {
+const UploadImg = ({ setUpload, setStatus, setCurrentStep }) => {
+    const handleChange = (dets) => {
+        const file = dets.target.files[0];
+        if (file) {
+            setUpload(file);
+            setStatus(prev => ({ ...prev, upload: true }))
+            setCurrentStep(2)
+        }
+    }
     return (
         <>
-            {!props.uploadStatus ?
-                <div className={styles['upload-image']}>
-                    <input
-                        onChange={(e) => {
-                            props.sendData(e.target.files);
-                            props.setUpload(true);
-                        }}
-                        type="file" id="select-img"
-                        style={{ display: "none" }}
-                        accept='.png,.jpeg,jpg,.webp'
-                    />
+            <div className={styles['upload-image']}>
+                <input
+                    onChange={(e) => {
+                        handleChange(e);
+                    }}
+                    type="file" id="select-img"
+                    style={{ display: "none" }}
+                    accept='.png,.jpeg,jpg,.webp'
+                />
 
-                    <label htmlFor='select-img' className={styles['upload-btn']}>
-                        <Upload size={25} />
-                        <span>Upload</span>
-                    </label>
-                    <span >Choose images or drag & drop it here.</span>
-                    <span className={styles['format-size']}>JPG, JPEG, PNG. Max 100 MB.</span>
-                </div>
-                :
-                <CropImg />
-            }
+                <label htmlFor='select-img' className={styles['upload-btn']}>
+                    <Upload size={25} />
+                </label>
+                <h3>Upload a Photo</h3>
+                <p >choose a photo from your gallery to begin your memory stub</p>
+            </div>
+            <div className={styles["template-section"]}>
+                <h3>Templates</h3>
+                <div className={styles['all-templates']}>Coming soon!</div>
+            </div>
         </>
     )
 }
