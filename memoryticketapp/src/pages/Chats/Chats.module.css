@@ -1,0 +1,18 @@
+.chats-tab{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-block: var(--space-md);
+}
+
+.chats-tab h2{
+    padding-inline: var(--space-md);
+}
+
+.chats-tab .all-chats{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
