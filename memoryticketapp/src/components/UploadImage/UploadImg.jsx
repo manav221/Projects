@@ -7,8 +7,8 @@ const UploadImg = ({ setUpload, setStatus, setCurrentStep }) => {
         const file = dets.target.files[0];
         if (file) {
             setUpload(file);
-            setStatus(prev => ({ ...prev, upload: true }))
-            setCurrentStep(2)
+            setStatus(prev => ({...prev,select:true}))
+            setCurrentStep(1)
         }
     }
     return (

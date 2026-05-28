@@ -70,8 +70,8 @@ const CropImg = ({ recieveData, setStatus, sendCropImageData, setCurrentStep }) 
       <div className={styles["bottom-actions"]}>
         <BackBtn name={"Continue"} customStyle={{width:"100%",padding:"var(--space-md)"}} onClick={() => {
           sendCropImageData(getCropImage(cropRect, canvasRef));
-          setStatus(prev => ({ ...prev, select: true }))
-          setCurrentStep(3)
+          setStatus(prev => ({ ...prev, details: true }))
+          setCurrentStep(2)
         }} />
       </div>
     </div>

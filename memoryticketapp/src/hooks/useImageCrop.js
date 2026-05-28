@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { MIN_HEIGHT,MIN_WIDTH,MAX_HEIGHT,MAX_WIDTH } from '../utils/constants';
 import { handlesSetting, cropperDragging } from '../utils/cropUtils';
 const useImageCrop = () => {
-    const [cropRect, setCropRect] = useState({ cropRectX: 100, cropRectY: 100, height: 90, width: 90 });
+    const [cropRect, setCropRect] = useState({ cropRectX: 100, cropRectY: 100, height: MIN_HEIGHT, width: MIN_WIDTH });
     const [activeHandle, setActiveHandle] = useState({
         handle: null,
         mouseStartX: null,
