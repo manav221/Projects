@@ -34,9 +34,9 @@ const Profile = ({ recieveData }) => {
         <h3>My Stubs</h3>
         <div className={styles["all-stubs"]}>
           {
-            recieveData.map((stub) => {
+            !recieveData.length <= 0 ? recieveData.map((stub) => {
               return <TicketStub data={stub} />
-            })
+            }) : <div className={styles['initial-txt']}>No stub created ever</div>
           }
         </div>
 
