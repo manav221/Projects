@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './TicketStub.module.css'
 import quotes from '../../assets/quotes.svg'
 import { MapPin, Calendar } from 'lucide-react';
-import stub from '../../assets/image\ 1.svg'
+import stub from '../../assets/image 1.svg'
 
 const TicketStub = ({ data }) => {
     return (
