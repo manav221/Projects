@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './CreateStub.module.css'
 import Topbar from '../../components/Topbar/Topbar.jsx'
 import UploadImg from '../../components/UploadImage/UploadImg.jsx';

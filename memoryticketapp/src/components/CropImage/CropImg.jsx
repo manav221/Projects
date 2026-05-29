@@ -29,7 +29,7 @@ const CropImg = ({ recieveData, setStatus, sendCropImageData, setCurrentStep }) 
     return () => {
       URL.revokeObjectURL(url);
     }
-  }, []);
+  }, [recieveData]);
 
   useEffect(() => {
     const overlayCanvas = overlayCanvasRef.current;

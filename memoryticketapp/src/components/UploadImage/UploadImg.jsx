@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Upload, UtilityPole } from 'lucide-react';
 import styles from './UploadImg.module.css'
 import CropImg from '../CropImage/CropImg';

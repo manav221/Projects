@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home.jsx'
 import Explore from './pages/Explore/Explore.jsx'
@@ -9,14 +9,8 @@ import Navbar from './components/Navbar/Navbar.jsx'
 import FloatingBtn from './components/FloatingMenu/FloatingBtn.jsx'
 
 const App = () => {
-  const [allStubData, setAllStubData] = useState([]);
-  useEffect(() => {
-    if (localStorage.getItem("allStubs")) {
-      let rawData = localStorage.getItem("allStubs");
-      let data = JSON.parse(rawData);
-      setAllStubData(data);
-    }
-  }, [allStubData.length])
+  const [allStubData, setAllStubData] = useState(JSON.parse(localStorage.getItem("allStubs")));
+
   return (
     <div className={['app-content']}>
       <Routes>
@@ -24,7 +18,7 @@ const App = () => {
         <Route path='/' element={<Home recieveData={allStubData} />} />
         <Route path='/explore' element={<Explore />} />
         <Route path='/chats' element={<Chats />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<Profile recieveData={allStubData} />} />
       </Routes>
     </div>
   )

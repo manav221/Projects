@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import TicketStub from '../TicketStub/TicketStub'
 import styles from "./StubPreview.module.css"
 import BackBtn from '../Buttons/BackBtn'
-const StubPreview = ({ recieveData, setStatus, allStub }) => {
+const StubPreview = ({ recieveData, allStub }) => {
     let navigate = useNavigate();
     const saveStub = () => {
         const allStubsData = [...allStub.allStubData, recieveData];
