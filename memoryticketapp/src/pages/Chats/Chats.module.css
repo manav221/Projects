@@ -12,6 +12,9 @@
 }
 
 .chats-tab .all-chats{
+    width: 100%;
+    height: 80vh;
+    flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
