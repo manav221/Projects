@@ -7,9 +7,11 @@ import CreateStub from './pages/CreateStub/CreateStub.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 import Navbar from './components/Navbar/Navbar.jsx'
 import FloatingBtn from './components/FloatingMenu/FloatingBtn.jsx'
+import Notification from './components/Notification/Notification.jsx'
 
 const App = () => {
-  const [allStubData, setAllStubData] = useState(JSON.parse(localStorage.getItem("allStubs")));
+  let data = localStorage.getItem("allStubs");
+  const [allStubData, setAllStubData] = useState(data ? JSON.parse(data) : []);
 
   return (
     <div className={['app-content']}>
@@ -19,6 +21,7 @@ const App = () => {
         <Route path='/explore' element={<Explore />} />
         <Route path='/chats' element={<Chats />} />
         <Route path='/profile' element={<Profile recieveData={allStubData} />} />
+        <Route path='/notifications' element={<Notification allStubData={allStubData} />} />
       </Routes>
     </div>
   )

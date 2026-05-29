@@ -9,13 +9,14 @@ const Navbar = () => {
         <Ticket size={25} style={{ transform: "rotate(90deg)" }} />
       </Link>
       <div className={styles["app-name"]}>Memory Stubs</div>
-      <div className={styles['app-notification']}>
-        <Bell />
-        <div className={styles['badge']}>
-          <span></span>
+      <Link to={"/notifications"}>
+        <div className={styles['app-notification']}>
+          <Bell />
+          <div className={styles['badge']}>
+            <span></span>
+          </div>
         </div>
-      </div>
-
+      </Link>
     </div>
   )
 }

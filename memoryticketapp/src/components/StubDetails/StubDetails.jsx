@@ -11,6 +11,7 @@ const StubDetails = ({ recieveData, setStatus, setCurrentStep, sendStubDetails }
     const handleChange = (dets, setData) => {
         setData(dets.target.value);
     }
+    
     return (
         <div className={styles['stub-details']}>
             <h2>Add Details</h2>
@@ -26,7 +27,8 @@ const StubDetails = ({ recieveData, setStatus, setCurrentStep, sendStubDetails }
                     place: stubPlace,
                     date: stubDate,
                     caption: stubDesc,
-                    img: recieveData
+                    img: recieveData,
+                    time: Date.now()
                 });
             }}>
 

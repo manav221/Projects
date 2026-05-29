@@ -43,7 +43,7 @@ const CreateStub = (stubData) => {
         {
             id: 4,
             component: StubPreview,
-            props: { recieveData: stubDetails, setStatus: setAllStepStatus, allStub: stubData }
+            props: { recieveData: stubDetails, allStub: stubData }
         }
     ];
 
