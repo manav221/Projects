@@ -1,0 +1,27 @@
+.btn{
+    border: none;
+    outline: none;
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: var(--transition-fst);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.btn span{
+    font-size: var(--font-md);
+    font-weight: 500;
+    margin: auto;
+}
+
+.btn:hover{
+    background-color: var(--secondary);
+    box-shadow: var(--shadow);
+}
+
+.btn:active{
+    transform: scale(0.95);
+}

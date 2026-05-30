@@ -1,0 +1,14 @@
+.home-screen{
+    width: 100%;
+    height: 100vh;
+    padding-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: scroll;
+    padding-bottom: var(--space-md);
+}
+
+.home-screen::-webkit-scrollbar{
+    display: none;
+}
