@@ -24,7 +24,7 @@ export const allHandles = [
     },
     {
         handle: "tr",
-        style: { height: "10px", width: "10px", right: 0, top: 0, transform: "translate(50%,-50%)", cursor: "nesw-resize" },
+        style: { height: "10px", width: "10px", right: 0, top: 0, transform: "translate(50%,-50%)", cursor: "nesw-resize", },
     },
     {
         handle: "right",

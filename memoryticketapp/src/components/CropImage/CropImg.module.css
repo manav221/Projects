@@ -32,6 +32,7 @@
     z-index: 3;
     top: 0;
     left: 400;
+    touch-action: none;
 }
 
 .cropper .handle {

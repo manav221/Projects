@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { MIN_HEIGHT,MIN_WIDTH,MAX_HEIGHT,MAX_WIDTH } from '../utils/constants';
+import { MIN_HEIGHT, MIN_WIDTH, MAX_HEIGHT, MAX_WIDTH } from '../utils/constants';
 import { handlesSetting, cropperDragging } from '../utils/cropUtils';
 const useImageCrop = () => {
     const [cropRect, setCropRect] = useState({ cropRectX: 100, cropRectY: 100, height: MIN_HEIGHT, width: MIN_WIDTH });
@@ -25,6 +25,7 @@ const useImageCrop = () => {
 
     const handleMouseDown = (dets, handleName, canvasRef) => {
         dets.stopPropagation();
+        dets.preventDefault();
         isResizing.current = true;
         let rect = canvasRef.current.getBoundingClientRect();
         setActiveHandle(prev => ({
@@ -40,37 +41,40 @@ const useImageCrop = () => {
         }))
     }
     const handleMouseDownCropper = (dets, canvasRef) => {
+        dets.preventDefault();
         isDragging.current = true;
         let rect = canvasRef.current.getBoundingClientRect();
         let offSetX = (dets.clientX - rect.left) - cropRect.cropRectX;
         let offSetY = (dets.clientY - rect.top) - cropRect.cropRectY;
-        setActiveHandle(prev => ({ ...prev,handle:"drag-handle", canvasRect: rect, offSetX: offSetX, offSetY: offSetX }));
+        setActiveHandle(prev => ({ ...prev, handle: "drag-handle", canvasRect: rect, offSetX: offSetX, offSetY: offSetY }));
     }
     useEffect(() => {
         if (!activeHandle.handle) return;
         let onUp = () => {
             isResizing.current = false;
             isDragging.current = false;
+            setActiveHandle(prev => ({ ...prev, handle: null }));
         };
         let onMove = (dets) => {
+            dets.preventDefault();
             let handleDetails = activeHandleRef.current;
             if (isResizing.current) {
                 let deltaX = (dets.clientX - handleDetails.canvasRect.left) - handleDetails.mouseStartX;
                 let deltaY = (dets.clientY - handleDetails.canvasRect.top) - handleDetails.mouseStartY;
-                handlesSetting[activeHandle.handle](dets, handleDetails, { deltaX, deltaY }, setCropRect);
+                handlesSetting[handleDetails.handle](dets, handleDetails, { deltaX, deltaY }, setCropRect);
             }
             if (isDragging.current) {
-                cropperDragging(dets, handleDetails,setCropRect)
+                cropperDragging(dets, handleDetails, setCropRect);
             }
         }
-        window.addEventListener("mousemove", onMove);
-        window.addEventListener("mouseup", onUp);
+        window.addEventListener("pointermove", onMove);
+        window.addEventListener("pointerup", onUp);
 
         return () => {
             window.removeEventListener("mousemove", onMove);
             window.removeEventListener("mouseup", onUp);
         }
-    }, [activeHandle.handle,isDragging.current])
+    }, [activeHandle.handle])
 
     return { cropRect, handleMouseDown, handleMouseDownCropper }
 }

@@ -48,7 +48,7 @@ const CropImg = ({ recieveData, setStatus, sendCropImageData, setCurrentStep }) 
         </canvas>
         <canvas className={styles["img-canvas"]} ref={canvasRef}>
         </canvas>
-        <div className={styles["cropper"]} onMouseDown={(dets) => { handleMouseDownCropper(dets, canvasRef) }}
+        <div className={styles["cropper"]} onPointerDown={(dets) => { handleMouseDownCropper(dets, canvasRef) }}
           style={{
             width: `${cropRect.width}px`, height: `${cropRect.height}px`, userSelect: "none",
             left: `${cropRect.cropRectX}px`, top: `${cropRect.cropRectY}px`
@@ -59,7 +59,7 @@ const CropImg = ({ recieveData, setStatus, sendCropImageData, setCurrentStep }) 
                 key={handle.handle}
                 className={`${styles['handle']}`}
                 style={handle.style}
-                onMouseDown={(dets) => {
+                onPointerDown={(dets) => {
                   handleMouseDown(dets, handle.handle, canvasRef)
                 }}
               ></div>
@@ -76,6 +76,6 @@ const CropImg = ({ recieveData, setStatus, sendCropImageData, setCurrentStep }) 
       </div>
     </div>
   )
-}
+} 
 
 export default CropImg
