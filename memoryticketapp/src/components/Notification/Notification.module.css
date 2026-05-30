@@ -28,6 +28,10 @@
     flex-direction: column;
 }
 
+.all-notification .default-txt{
+    margin: auto;
+}
+
 .all-notification::-webkit-scrollbar{
     display: none;
 }

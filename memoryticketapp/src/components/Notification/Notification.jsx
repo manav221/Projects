@@ -5,7 +5,6 @@ import { TicketPlus } from 'lucide-react';
 import FloatingBtn from '../FloatingMenu/FloatingBtn';
 
 const Notification = ({ allStubData }) => {
-    console.log(allStubData[0].time);
     return (
         <div className={styles['notification-tab']}>
             <div className={styles["noti-tab-all"]}>
@@ -28,7 +27,7 @@ const Notification = ({ allStubData }) => {
                                 </div>
                             )
                         }):
-                        <div>No notifications</div>
+                        <div className={styles['default-txt']}>No notifications</div>
                     }
 
                 </div>
